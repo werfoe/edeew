@@ -1,0 +1,24 @@
+import random
+
+def ugadaika():
+  minn = 1
+  maxx = 100
+  n = random.randint(minn, maxx)
+  print(f"угадай число от {minn} до {maxx}")
+  pop = 0
+  while True:
+    try:
+      a = int(input("догадка: "))
+      pop += 1
+      if a < n:
+        print("больше!")
+      elif a > n:
+        print("меньше!")
+      else:
+        print("юпииииии! ты угадал число {a} за {pop} попыток!")
+        break
+    except ValueError:
+      print("некорректный ввод")
+
+if __name__ == "__main__":
+  ugadaika()
