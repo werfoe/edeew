@@ -1,0 +1,25 @@
+import pytest
+from unittest.mock import patch
+from randomname import FunRandomName
+
+test_adjectives = ['happy', 'sad', 'angry']
+test_nouns = ['cat', 'dog', 'fish']
+
+@pytest.fixture
+def fun_random_name():
+
+def test_get_random_adjective(fun_random_name):
+with patch('random.choice', return_value='happy'):
+result = fun_random_name._FunRandomName__get_random_adjective()
+assert result == 'happy'
+
+def test_get_random_noun(fun_random_name):
+with patch('random.choice', return_value='cat'):
+result = fun_random_name._FunRandomName__get_random__noun()
+assert result == 'cat'
+
+def test_get_name(fun_random_name):
+with patch('random.choice') as mock_choice:
+mock_choice.side_effect = ['happy', 'cat']
+result = fun_random_name.get_name()
+assert result == 'happy cat'
