@@ -1,0 +1,9 @@
+import pytest
+from task2 import slices
+def test_slices():
+assert slices(0) == 1 # Когда a = 0, результат должен быть 1
+assert slices(1) == 2 # Когда a = 1, результат должен быть 2
+assert slices(2) == 4 # Когда a = 2, результат должен быть 4
+assert slices(3) == 7 # Когда a = 3, результат должен быть 7
+assert slices(4) == 11 # Когда a = 4, результат должен быть 11
+assert slices(5) == 16 # Когда a = 5, результат должен быть 16
