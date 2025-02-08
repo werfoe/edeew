@@ -1,0 +1,35 @@
+import random
+
+def game():
+  words = ["привет", "пока", "да", "нет", "ура"]
+  word = random.choice(words)
+  pop = 6
+  b = set(word)
+  bg = set()
+  a = set(chr(x) for x in range(ord('a'), ord('z') + 1))
+  ost = a - bg
+  while len(b) > 0 and pop > 0:
+    print(f"кол-во попыток: {pop}")
+    print("неугаданные буквы:", " ".join(ost))
+    wordsss = [letter if letter in bg else "_" for letter in слово]
+    print(" ".join(wordsss))
+    n = input("введите букву: ").lower()
+    if len(n) != 1 or not n.isalpha():
+      print("введите одну букву.")
+      continue
+    if n in bg:
+      print("эта буква уже была")
+      continue
+    else:
+      bg.add(n)
+    if n in b:
+      print("круто")
+      if len(b) == 0:
+        print(f"вы угадали слово")
+    else:
+      pop -= 1
+      print(f".осталось {pop} попыток")
+  if pop == 0:
+    print(f"увы :( слово было {слово}.")
+if name == "main":
+  game()
