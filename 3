@@ -1,0 +1,30 @@
+import random
+
+def game():
+  while True:
+    comp = random.choice(["камень", "ножницы", "бумага"])
+    user = input("камень, ножницы или бумага?: ").lower()
+    print(f"противник: {comp}")
+    if user == comp:
+      print("ничья")
+    elif (
+        (user == "камень" and comp == "ножницы") or
+        (user == "ножницы" and comp == "бумага") or
+        (user == "бумага" and comp == "камень")
+    ):
+      print("победа!")
+    else:
+      print("вы проиграли!")
+
+    res = input("сыграть еще раз?: ").lower()
+    if res == "нет":
+      print("возвращайтесь!")
+      break
+    elif res != "да":
+      print("неверный ввод")
+
+if __name__ == "__main__":
+    game()
+
+
+
