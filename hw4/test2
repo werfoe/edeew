@@ -1,0 +1,22 @@
+import random
+import pytest
+from unittest.mock import patch
+from brosokkuba import brosok, main
+def test_brosok():
+with patch('random.randint') as mock_randint:
+mock_randint.return_value = 3
+result = brosok()
+assert result == 3
+mock_randint.assert_called_once_with(1, 6)
+
+@pytest.fixture
+def monkeypatch_input(monkeypatch):
+inputs = iter(['да', 'да', 'нет'])
+monkeypatch.setattr('builtins.input', lambda _: next(inputs))
+
+def test_main(monkeypatch_input, capsys):
+with patch('random.randint', return_value=4):
+main()
+captured = capsys.readouterr()
+assert "выпала кость: 4" in captured.out
+assert "возвращайтесь!" in captured.out
