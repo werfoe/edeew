@@ -1,0 +1,38 @@
+import random
+import pytest
+from unittest.mock import patch
+from io import StringIO
+from game_module import game
+
+def test_game_draw(capfd):
+with patch('random.choice', return_value="камень"), patch('builtins.input', side_effect=["камень", "нет"]):
+game()
+captured = capfd.readouterr()
+assert "противник: камень" in captured.out
+assert "ничья" in captured.out
+assert "возвращайтесь!" in captured.out
+
+def test_game_win(capfd):
+with patch('random.choice', return_value="ножницы"), patch('builtins.input', side_effect=["камень", "нет"]):
+game()
+captured = capfd.readouterr()
+assert "противник: ножницы" in captured.out
+assert "победа!" in captured.out
+assert "возвращайтесь!" in captured.out
+
+def test_game_lose(capfd):
+with patch('random.choice', return_value="бумага"), patch('builtins.input', side_effect=["камень", "нет"]):
+game()
+captured = capfd.readouterr()
+assert "противник: бумага" in captured.out
+assert "вы проиграли!" in captured.out
+assert "возвращайтесь!" in captured.out
+
+def test_game_invalid_input(capfd):
+with patch('random.choice', return_value="бумага"), patch('builtins.input', side_effect=["что-то", "да", "бумага", "нет"]):
+game()
+captured = capfd.readouterr()
+assert "неверный ввод" in captured.out
+assert "противник: бумага" in captured.out
+assert "вы проиграли!" in captured.out
+assert "возвращайтесь!" in captured.out
