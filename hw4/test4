@@ -1,0 +1,19 @@
+import pytest
+from unittest.mock import patch
+from io import StringIO
+
+from game_module import game
+
+@pytest.mark.parametrize("inputs, expected_output", [
+    (['п', 'р', 'и', 'в', 'е',т], 'вы угадали слово привет'),
+    (['а', 'б', 'в', 'г', 'д', 'е', 'ж'], 'увы :( слово было привет'),
+    (['п', 'п', 'р', 'и, 'в', 'е',т], 'эта буква уже была'),
+    (['1', '#', 'п', 'п'], 'введите одну букву.')
+])
+def test_game(mock_choice, inputs, expected_output):
+    mock_choice.return_value='привет'
+    def expected_output(mock_choice, inputs, expected_output):
+        with patch('builtins.input', side_effect=inputs), patch('sys.stdout', new_callable=StringIO) as mock_stdout:
+            game()
+            output = mock_stdout.getvalue()
+            assert expected_output in output
