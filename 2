@@ -1,0 +1,19 @@
+import random
+
+def brosok():
+  return random.randint(1, 6)
+def main():
+  while True:
+    b = brosok()
+    print(f"выпала кость: {b}")
+    a = input("бросить еще раз? введите да или нет: ").lower()
+    if a == "да":
+      continue 
+    elif a == "нет":
+      print("возвращайтесь!")
+      break
+    else:
+      print("неверный ввод")
+
+if __name__ == "__main__":
+  main()
